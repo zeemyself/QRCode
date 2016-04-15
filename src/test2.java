@@ -7,12 +7,13 @@ import javax.swing.*;
 
 public class test2 implements TextListener{
 	private String scan;
-	private JFrame frame1;
+	private JFrame frame1,frame2;
 	private JLabel image; 
 	private JLabel qrlabel;
-	private TextField qr;
-	private JLabel text;
-	private JPanel panel1,panel2;
+	private TextField qr,api,user;
+	private JLabel text,text2,text3,text4;
+	private JPanel panel1,panel2,panel3;
+	private JButton button1;
 	private static String[] imageList = {"src/pic/rsz_qrcode.png","src/pic/green_tick.png","src/pic/red_tick.png"};
 	public test2(){
 		Dimension expectedDimension = new Dimension(500, 500);
@@ -52,18 +53,6 @@ public class test2 implements TextListener{
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame1.setMaximumSize(new Dimension(500,500));
 //        frame1.setMinimumSize(new Dimension(500,500));
@@ -74,7 +63,48 @@ public class test2 implements TextListener{
 		frame1.setLocation(150,150);
 		frame1.pack();
 //		frame1.setPreferredSize(new Dimension(500,500));
-		frame1.setVisible(true);
+		frame1.setVisible(false);
+		
+		
+		
+		frame2 = new JFrame();
+		panel3 = new JPanel(new SpringLayout());
+		api = new TextField();
+		user = new TextField();
+		text2 = new JLabel("USER API",JLabel.TRAILING);
+		text3 = new JLabel("USER TOKEN",JLabel.TRAILING);
+		text4 = new JLabel("",JLabel.TRAILING);
+		button1 = new JButton("Validate");
+		button1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				frame1.setVisible(true);
+				frame2.setVisible(false);
+			}
+		} );
+		
+		panel3.add(text2);
+		panel3.add(api);
+		panel3.setOpaque(true);
+		panel3.add(text3);
+		panel3.add(user);
+		panel3.add(text4);
+		panel3.add(button1);
+		
+		
+		SpringUtilities.makeCompactGrid(panel3,
+                3, 2, //rows, cols
+                6, 6,        //initX, initY
+                6, 6);
+		frame2.add(panel3);
+		frame2.setVisible(true);
+		frame2.setLocation(150,150);
+		frame2.setSize(500,150);
+		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
 	}
 	
 	public static void main(String[] args) {
