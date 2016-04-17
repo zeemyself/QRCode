@@ -10,7 +10,7 @@ import java.net.URL;
 import javax.swing.*;
 
 
-public class test2 implements TextListener{
+public class UI implements TextListener{
 	private int count =0;
 	private ButtonGroup radiogroup;
 	private String error;
@@ -24,7 +24,7 @@ public class test2 implements TextListener{
 	private JButton button1;
 	private JRadioButton enter,exit;
 	private static String[] imageList = {"src/pic/rsz_qrcode.png","src/pic/green_tick.png","src/pic/red_tick.png"};
-	public test2(){
+	public UI(){
 		Dimension expectedDimension = new Dimension(500, 500);
 		frame1 = new JFrame("Ticket Provider Manager");
 		panel1 = new JPanel();
@@ -126,7 +126,7 @@ public class test2 implements TextListener{
 	}
 	
 	public static void main(String[] args) {
-		new test2();
+		new UI();
 //		request("qMnsbPILS8eIvluTVb1rdg","707a6393","76fb3bd5");
 
 	}
