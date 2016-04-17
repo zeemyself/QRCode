@@ -11,9 +11,10 @@ import javax.swing.*;
 
 
 public class UI implements TextListener{
-	private int count =0;
+	private final String TITLE = "Ticket Provider Manager";
+	private final String QR_TEXT = "Please show your QR code";
+	private final int WAIT_TIME = 3000;
 	private ButtonGroup radiogroup;
-	private String error;
 	private String scan;
 	private JFrame frame1,frame2;
 	private JLabel image; 
@@ -26,7 +27,7 @@ public class UI implements TextListener{
 	private static String[] imageList = {"src/pic/rsz_qrcode.png","src/pic/green_tick.png","src/pic/red_tick.png"};
 	public UI(){
 		Dimension expectedDimension = new Dimension(500, 500);
-		frame1 = new JFrame("Ticket Provider Manager");
+		frame1 = new JFrame(TITLE);
 		panel1 = new JPanel();
 		panel1.setPreferredSize(expectedDimension);
         panel1.setMaximumSize(expectedDimension);
@@ -39,13 +40,10 @@ public class UI implements TextListener{
 		qrlabel.setSize(10,10);
 		image = qrlabel;
 		qr = new TextField("");
-//		qr.setVisible(false);
 		qr.requestFocus();
-//		qr.addActionListener(this);
 		qr.addTextListener(this);
 		
-//		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
-		text = new JLabel("Please show your QR code");
+		text = new JLabel(QR_TEXT);
 		text.setFont(new Font("Lao MN", Font.PLAIN, 19));
 		text.setHorizontalAlignment(SwingConstants.CENTER);
 		panel1.add(image);
@@ -63,20 +61,15 @@ public class UI implements TextListener{
 		
 		
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame1.setMaximumSize(new Dimension(500,500));
-//        frame1.setMinimumSize(new Dimension(500,500));
-//		frame1.add(panel1,BorderLayout.NORTH);
         frame1.add(panel2,BorderLayout.NORTH);
         frame1.add(box,BorderLayout.NORTH);
-//		frame1.setSize(500,200);
 		frame1.setLocation(150,150);
 		frame1.pack();
-//		frame1.setPreferredSize(new Dimension(500,500));
 		frame1.setVisible(false);
 		
 		
 		
-		frame2 = new JFrame("Ticket Provider Manager");
+		frame2 = new JFrame(TITLE);
 		panel3 = new JPanel(new SpringLayout());
 		api = new TextField();
 		activity = new TextField();
@@ -88,9 +81,13 @@ public class UI implements TextListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				frame1.setVisible(true);
-				frame2.setVisible(false);
+				if(api.getText().equals("") || activity.getText().equals("")){
+					makeAlert("Invalid token or activity id.");
+				}
+				else{
+					frame1.setVisible(true);
+					frame2.setVisible(false);
+				}	
 			}
 		} );
 		
@@ -127,21 +124,14 @@ public class UI implements TextListener{
 	
 	public static void main(String[] args) {
 		new UI();
-//		request("qMnsbPILS8eIvluTVb1rdg","707a6393","76fb3bd5");
-
 	}
 
 	@Override
 	public void textValueChanged(TextEvent e) {
-		// TODO Auto-generated method stub
-		count++;
-		System.out.println(count);
-		System.out.println(qr.getText());
 		scan = qr.getText();
 		if(scan.length()==8){
 			if(request(api.getText(),activity.getText(),qr.getText(),enter.isSelected())){
 				qrlabel.setIcon(new ImageIcon(imageList[1]));
-				System.out.println("FUCKK");
 				makeAlert("pass");
 			}
 			else{
@@ -149,10 +139,9 @@ public class UI implements TextListener{
 				makeAlert("fail");
 			}
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(WAIT_TIME);
 				qrlabel.setIcon(new ImageIcon(imageList[0]));
 			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			qr.setText("");
@@ -194,11 +183,7 @@ public class UI implements TextListener{
 		InputStream stream;
 		try {
 			stream = connection.getInputStream();
-//			System.out.println(stream);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-//			System.out.println(e.getMessage());
-//			e.printStackTrace();
 			return false;
 		}
 		
