@@ -71,8 +71,8 @@ public class test2 implements TextListener{
 		panel3 = new JPanel(new SpringLayout());
 		api = new TextField();
 		user = new TextField();
-		text2 = new JLabel("USER API",JLabel.TRAILING);
-		text3 = new JLabel("USER TOKEN",JLabel.TRAILING);
+		text2 = new JLabel("api token",JLabel.TRAILING);
+		text3 = new JLabel("activity id",JLabel.TRAILING);
 		text4 = new JLabel("",JLabel.TRAILING);
 		button1 = new JButton("Validate");
 		button1.addActionListener(new ActionListener() {
