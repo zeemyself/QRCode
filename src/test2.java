@@ -26,7 +26,7 @@ public class test2 implements TextListener{
 	private static String[] imageList = {"src/pic/rsz_qrcode.png","src/pic/green_tick.png","src/pic/red_tick.png"};
 	public test2(){
 		Dimension expectedDimension = new Dimension(500, 500);
-		frame1 = new JFrame("Yeahhhhhhhhh");
+		frame1 = new JFrame("Ticket Provider Manager");
 		panel1 = new JPanel();
 		panel1.setPreferredSize(expectedDimension);
         panel1.setMaximumSize(expectedDimension);
@@ -76,7 +76,7 @@ public class test2 implements TextListener{
 		
 		
 		
-		frame2 = new JFrame();
+		frame2 = new JFrame("Ticket Provider Manager");
 		panel3 = new JPanel(new SpringLayout());
 		api = new TextField();
 		activity = new TextField();
